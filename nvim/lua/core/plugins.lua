@@ -128,6 +128,74 @@ local plugins = {
         event = "LspAttach",
         config = function() require("core.configs.illuminate") end,
     },
+    -- Harpoon (navigation through bookmarks)
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		config = function()
+			require("harpoon"):setup()
+		end,
+		keys = {
+			{
+				"<leader>m",
+				function()
+					require("harpoon"):list():add()
+				end,
+				desc = "harpoon file",
+			},
+			{
+				"<leader>h",
+				function()
+					local harpoon = require("harpoon")
+					harpoon.ui:toggle_quick_menu(harpoon:list())
+				end,
+				desc = "harpoon quick menu",
+			},
+			{
+				"<C-q>",
+				function()
+					require("harpoon"):list():select(1)
+				end,
+				desc = "harpoon to file 1",
+			},
+			{
+				"<C-w>",
+				function()
+					require("harpoon"):list():select(2)
+				end,
+				desc = "harpoon to file 2",
+			},
+			{
+				"<C-e>",
+				function()
+					require("harpoon"):list():select(3)
+				end,
+				desc = "harpoon to file 3",
+			},
+			{
+				"<C-r",
+				function()
+					require("harpoon"):list():select(4)
+				end,
+				desc = "harpoon to file 4",
+			},
+			{
+				"<C-S-h>",
+				function()
+					require("harpoon"):list():prev()
+				end,
+				desc = "harpoon to file 4",
+			},
+			{
+				"<C-S-l>",
+				function()
+					require("harpoon"):list():next()
+				end,
+				desc = "harpoon to file 4",
+			},
+		},
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
 }
 
 if config.feature_config.use_scrollbars then
